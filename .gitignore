@@ -1,0 +1,30 @@
+# Python
+*.pyc
+__pycache__/
+.Python
+venv/
+env/
+.venv/
+
+# Django
+*.log
+*.sqlite3
+media/
+static_collected/
+
+# Wagtail specific
+wagtail_generated_static/ # If you're using a build process that generates static files
+wagtail_media/ # If you're using a custom media storage setup
+
+# IDEs and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Other common files
+.env
+.flaskenv

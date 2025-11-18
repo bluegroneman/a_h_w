@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block body_class %}template-aboutpage{% endblock %}
+
+{% block content %}
+
+<section class="bg-gradient-to-br from-primary to-primary-dark text-white py-16 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ page.heading }}</h1>
+        <p class="text-xl md:text-2xl font-light">{{ page.subheading }}</p>
+    </div>
+</section>
+
+<section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-primary text-center mb-6">{{ page.mission_heading }}</h2>
+        <div class="text-lg leading-relaxed mb-8 prose prose-lg max-w-none">
+            {{ page.mission_statement|richtext }}
+        </div>
+        <p class="text-center text-lg">
+            For application inquiries, please email:
+            <a href="mailto:{{ page.contact_email }}" class="text-primary hover:text-primary-dark hover:underline">{{ page.contact_email }}</a>
+        </p>
+    </div>
+</section>
+
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-6">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <blockquote class="text-xl italic text-gray-800">
+                    <p>"{{ page.quote_1 }}"</p>
+                    <footer class="mt-4 text-right text-gray-600 not-italic">— {{ page.quote_1_author }}</footer>
+                </blockquote>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <blockquote class="text-xl italic text-gray-800">
+                    <p>"{{ page.quote_2 }}"</p>
+                    <footer class="mt-4 text-right text-gray-600 not-italic">— {{ page.quote_2_author }}</footer>
+                </blockquote>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <blockquote class="text-xl italic text-gray-800">
+                    <p>"{{ page.quote_3 }}"</p>
+                    <footer class="mt-4 text-right text-gray-600 not-italic">— {{ page.quote_3_author }}</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

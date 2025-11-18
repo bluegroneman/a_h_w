@@ -1,0 +1,111 @@
+{% load static wagtailcore_tags wagtailuserbar %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+            {% endblock %}
+        </title>
+        {% if page.search_description %}
+        <meta name="description" content="{{ page.search_description }}" />
+        {% endif %}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Force all links in the live preview panel to be opened in a new tab #}
+        {% if request.in_preview_panel %}
+        <base target="_blank">
+        {% endif %}
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/output.css' %}">
+
+        {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        <header class="bg-white shadow-md sticky top-0 z-50">
+            <nav class="py-4">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                    <div class="logo">
+                        <a href="/" class="text-2xl font-bold text-primary hover:text-primary-dark transition-colors">
+                            Almost Home Wyoming
+                        </a>
+                    </div>
+                    <button class="mobile-menu-toggle lg:hidden flex flex-col gap-1 p-2" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="hidden lg:flex gap-8 list-none">
+                        <li><a href="/" class="text-gray-800 font-medium hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="/about/" class="text-gray-800 font-medium hover:text-primary transition-colors">About</a></li>
+                        <li><a href="/contact/" class="text-gray-800 font-medium hover:text-primary transition-colors">Contact</a></li>
+                        <li><a href="/stories/" class="text-gray-800 font-medium hover:text-primary transition-colors">Stories</a></li>
+                        <li><a href="/donate/" class="text-gray-800 font-medium hover:text-primary transition-colors">Donate</a></li>
+                    </ul>
+                </div>
+                <ul class="nav-menu lg:hidden hidden flex-col gap-4 p-4 bg-white shadow-md">
+                    <li><a href="/" class="text-gray-800 font-medium hover:text-primary transition-colors block">Home</a></li>
+                    <li><a href="/about/" class="text-gray-800 font-medium hover:text-primary transition-colors block">About</a></li>
+                    <li><a href="/contact/" class="text-gray-800 font-medium hover:text-primary transition-colors block">Contact</a></li>
+                    <li><a href="/stories/" class="text-gray-800 font-medium hover:text-primary transition-colors block">Stories</a></li>
+                    <li><a href="/donate/" class="text-gray-800 font-medium hover:text-primary transition-colors block">Donate</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="bg-gray-800 text-white py-8 mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="mb-6">
+                    <ul class="flex flex-wrap justify-center gap-8 list-none">
+                        <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="/about/" class="hover:text-primary transition-colors">About</a></li>
+                        <li><a href="/contact/" class="hover:text-primary transition-colors">Contact</a></li>
+                        <li><a href="/stories/" class="hover:text-primary transition-colors">Stories</a></li>
+                        <li><a href="/donate/" class="hover:text-primary transition-colors">Donate</a></li>
+                    </ul>
+                </nav>
+                <div class="text-center text-gray-400 text-sm">
+                    <p>&copy; {% now "Y" %} Almost Home Wyoming, Inc.</p>
+                </div>
+            </div>
+        </footer>
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/src.js' %}"></script>
+
+        {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+        <script>
+            // Mobile menu toggle
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                const menu = document.querySelector('.nav-menu');
+
+                if (toggle) {
+                    toggle.addEventListener('click', function() {
+                        menu.classList.toggle('active');
+                        toggle.classList.toggle('active');
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

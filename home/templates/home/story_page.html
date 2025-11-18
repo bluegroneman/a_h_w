@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-storypage{% endblock %}
+
+{% block content %}
+
+<article class="pb-16">
+    <header class="relative mb-12">
+        {% if page.featured_image %}
+            {% image page.featured_image fill-1200x600 as featured_img %}
+            <div class="w-full h-96 overflow-hidden">
+                <img src="{{ featured_img.url }}" alt="{{ page.title }}" class="w-full h-full object-cover">
+            </div>
+        {% endif %}
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <span class="inline-block bg-primary text-white px-4 py-2 rounded mb-4">{{ page.get_story_type_display }}</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{{ page.title }}</h1>
+            {% if page.summary %}
+                <p class="text-xl text-gray-600 mt-4">{{ page.summary }}</p>
+            {% endif %}
+        </div>
+    </header>
+
+    <section class="py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+                {{ page.body|richtext }}
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-gray-300 mt-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a href="{{ page.get_parent.url }}" class="text-primary font-semibold hover:text-primary-dark hover:underline">← Back to Stories</a>
+        </div>
+    </footer>
+</article>
+
+{% endblock content %}

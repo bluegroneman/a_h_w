@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block body_class %}template-donatepage{% endblock %}
+
+{% block content %}
+
+<section class="bg-gradient-to-br from-primary to-primary-dark text-white py-16 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold">{{ page.heading }}</h1>
+    </div>
+</section>
+
+<section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-xl text-center mb-12 prose prose-lg max-w-none">
+            {{ page.intro|richtext }}
+        </div>
+
+        <div class="text-lg leading-relaxed mb-12 prose prose-lg max-w-none">
+            {{ page.body|richtext }}
+        </div>
+        <div style="position:relative;overflow:hidden;width:100%;height:1200px;padding-top:100%">
+            <iframe title='Donation form powered by Zeffy' style='position: absolute; border: 0; top:0;left:0;bottom:0;right:0;width:100%;height:100%' src='https://www.zeffy.com/en-US/embed/donation-form/bbe7d47c-fd08-4acc-9fcd-f938339c8054' allowpaymentrequest allowTransparency="true">
+            </iframe>
+        </div>
+        <div class="mt-12 p-8 bg-gray-50 rounded-lg text-center">
+            <p class="text-2xl font-semibold text-primary mb-4">Your support makes a difference in our community.</p>
+            <p class="mb-6">To make a donation, please contact us at <a href="/contact/" class="text-primary hover:text-primary-dark hover:underline font-semibold">our contact page</a> or mail your contribution to:</p>
+            <address class="not-italic text-lg leading-relaxed">
+                Almost Home Wyoming<br>
+                P.O. Box 44<br>
+                Lander, WY 82520
+            </address>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
